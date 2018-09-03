@@ -94,7 +94,3 @@ class RideOffer():
         conn.commit()
         print("update  successful")
          
-
-   
-
-    
