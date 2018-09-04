@@ -1,17 +1,18 @@
 import os
 import psycopg2
+
+
 class Db():
     """This class handles all the initial db transactions"""
     @staticmethod
-    def db_connection(config_name):
+    def db_connection():
         """creates a connection to the postgres db"""
-        
-    
+
         conn = psycopg2.connect(
-                                 dbname="Drive",
-                                 user="postgres", 
-                                 password= os.environ.get('db_password')
-                                 )
+            dbname=os.environ.get("db_name"),
+            user="postgres",
+            password=os.environ.get('db_password')
+        )
         print(conn)
         cur = conn.cursor()
         cur.execute('SELECT version()')
@@ -24,7 +25,7 @@ class Db():
     def create_tables():
         """creates all the tables and the relationships"""
         commands = (
-            #creates users table
+            # creates users table
             """CREATE TABLE IF NOT EXISTS users( 
                 id SERIAL PRIMARY KEY,
                 username VARCHAR(255) NOT NULL,
@@ -32,7 +33,7 @@ class Db():
                 email_adress VARCHAR(255) NOT NULL,
                 user_type VARCHAR(255) NOT NULL
             )""",
-            #creates ride_offer table
+            # creates ride_offer table
             """CREATE TABLE IF NOT EXISTS ride_offer(
                 ride_owner VARCHAR(255) NOT NULL,
                 id SERIAL PRIMARY KEY,
@@ -44,7 +45,7 @@ class Db():
                 available_seats INTEGER NOT NULL,
                 date_created VARCHAR(255) NOT NULL
             )""",
-           #creates ride_request table
+            # creates ride_request table
             """CREATE TABLE IF NOT EXISTS ride_request(
                 requested_by VARCHAR(255) NOT NULL,
                 id SERIAL PRIMARY KEY,
@@ -56,10 +57,22 @@ class Db():
             )"""
         )
 
-        con = Db.db_connection(os.environ.get('config_name'))
+        con = Db.db_connection()
         print(con)
         cur = con.cursor()
         for command in commands:
             cur.execute(command)
             con.commit()
-        
+
+    @staticmethod
+    def drop_all_tables():
+        con = Db.db_connection()
+        command = (
+            'drop table if exists "' | | users | | '" cascade;' from pg_tables
+            'drop table if exists "' | | ride_request | | '" cascade;' from pg_tables
+            'drop table if exists "' | | ride_offer | | '" cascade;' from pg_tables
+        )
+
+        for command in commands:
+            cur.execute(command)
+            con.commit()
