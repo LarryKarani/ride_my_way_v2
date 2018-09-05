@@ -19,6 +19,12 @@ class BaseTestCase(TestCase):
             "email": "karanilarry@gmail.com",
             "password": "hardpassword#"
         }
+
+        self.registerdata_no_username = {
+            "username": " ",
+            "email": "karanilarry@gmail.com",
+            "password": "hardpassword#"
+        }
         self.rideoffer_data = {
             "ride_owner": "mary",
             "ride_route": "mombasa road",
@@ -45,7 +51,14 @@ class BaseTestCase(TestCase):
             "current_location": "railways",
             "final_destination": "  ",
         }
-
+        self.wrong_date_request = {
+            "requested_by": "jacob",
+            "phone": "0701043047",
+            "ride_offer_id": 1,
+            "depature_time": "12452018 12:30",
+            "current_location": "railways",
+            "final_destination": "kigali",
+        }
         self.wrong_ride = {
 
             "ride_owner": "mary",
