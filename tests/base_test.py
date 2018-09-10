@@ -17,105 +17,42 @@ class BaseTestCase(TestCase):
         self.registerdata = {
             "username": "Larry Karani",
             "email": "karanilarry@gmail.com",
-            "password": "hardpassword#"
+            "password": "hardpassword#",
+            "designation":'driver'
         }
-
+        self.data_with_invalid_email= {
+            "username": "Larry Karani",
+            "email": "karani.com",
+            "password": "hardpassword#",
+            "designation":'driver'
+        }
         self.registerdata_no_username = {
             "username": " ",
             "email": "karanilarry@gmail.com",
-            "password": "hardpassword#"
-        }
-        self.rideoffer_data = {
-            "ride_owner": "mary",
-            "ride_route": "mombasa road",
-            "price": "$56",
-            "depature_time": "12/45/2018 12:30",
-            "current_location": "railways",
-            "final_destination": "syokimau",
-            "available_seats": 6
-        }
-        self.riderequest_data = {
-            "requested_by": "jacob",
-            "phone": "0701043047",
-            "ride_offer_id": 1,
-            "depature_time": "12/45/2018 12:30",
-            "current_location": "railways",
-            "final_destination": "syokimau",
+            "password": "hardpassword#",
+            "designation": "driver"
         }
 
-        self.wrong_request = {
-            "requested_by": "jacob",
-            "phone": "0701043047",
-            "ride_offer_id": 1,
-            "depature_time": "12/45/2018 12:30",
-            "current_location": "railways",
-            "final_destination": "  ",
-        }
-        self.wrong_date_request = {
-            "requested_by": "jacob",
-            "phone": "0701043047",
-            "ride_offer_id": 1,
-            "depature_time": "12452018 12:30",
-            "current_location": "railways",
-            "final_destination": "kigali",
-        }
-        self.wrong_ride = {
-
-            "ride_owner": "mary",
-            "ride_route": "mombasa road",
-            "price": "$56",
-            "depature_time": "12/45/2018 12:30",
-            "current_location": "railways",
-            "final_destination": "syokimau",
-            "available_seats": 'twenty'
+        self.short_password={
+            "username": "elvis ",
+            "email": "karanilarry@gmail.com",
+            "password": "hard",
+            "designation": "driver"
         }
 
-        self.wride_with_wrong_date = {
-            "ride_owner": "mary",
-            "ride_route": "mombasa road",
-            "price": "$56",
-            "depature_time": "12/45/2018 12:30",
-            "current_location": "railways",
-            "final_destination": "syokimau",
-            "available_seats": 4
+        self.wrong_designation={
+            "username": "elvis",
+            "email": "karanilarry@gmail.com",
+            "password": "hard33333444",
+            "designation": "pilot"
         }
 
-        self.request_invalid_id = {
-            "requested_by": "jacob",
-            "phone": "0701043047",
-            "ride_offer_id": 50,
-            "depature_time": "12/45/2018 12:30",
-            "current_location": "railways",
-            "final_destination": "syokimau",
-        }
-        self.default_ride_request = ride_offer.RideOffer(
-            'james', '0701043047', 1, "12/45/2018 12:30", "mbagathi", "juja", 8)
-        self.default_ride_offer = ride_offer.RideOffer(
-            'james', 'jogoo road', "$50", "12/45/2018 12:30", "mbagathi", "juja")
         self.default_user = users.User(
-            'james', 'hardpassword#', 'james@gmail.com')
+            'james', 'hardpassword#', 'james@gmail.com','driver')
         self.default_user.register_user()
-        # login details
-        self.login = {
-            "email": "james@gmail.com"
-            "password": "hardpassword#"
-        }
 
-        response = self.client.post('api/v1/auth/login', data=self.login)
-        self.token = json.loads(response.data)["token"]
-        self.headers = {
-            'Authorization': 'Bearer' + self.token,
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        }
-
-        self.invalid_token = {
-            'Authorization': 'Bearer' + self.token,
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        }
-
-    def tearDown():
+        
+    def tearDown(self):
         """clean Db"""
         db.Db.drop_all_tables()
         self.client = None

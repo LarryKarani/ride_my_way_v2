@@ -1,6 +1,6 @@
 import os
 import datetime
-from db import Db
+from .db import Db
 
 
 class RideOffer():

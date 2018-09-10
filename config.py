@@ -19,6 +19,7 @@ class DevelopmentConfig(Config):
 
 class TestingConfig(Config):
     Testing = True
+    DEBUG = True
     Database = {
 
         'password':  os.environ.get('db_password'),

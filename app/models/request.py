@@ -1,6 +1,6 @@
 import os
 import datetime
-from db import Db
+from .db import Db
 
 """This module containts the request ride feature"""
 
@@ -37,7 +37,7 @@ class RideRequest():
     @staticmethod
     def delete_ride_request(id):
         sql = f"DELETE FROM ride_request WHERE ride_request.id ={id}"
-        conn = Db.db_connection(os.environ.get()
+        conn = Db.db_connection()
         cur=conn.cursor()
         cur.execute(sql)
         conn.commit()

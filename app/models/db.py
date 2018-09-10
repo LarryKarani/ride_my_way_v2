@@ -13,7 +13,7 @@ class Db():
             user="postgres",
             password=os.environ.get('db_password')
         )
-        print(conn)
+        
         cur = conn.cursor()
         cur.execute('SELECT version()')
         db_version = cur.fetchone()
@@ -58,7 +58,6 @@ class Db():
         )
 
         con = Db.db_connection()
-        print(con)
         cur = con.cursor()
         for command in commands:
             cur.execute(command)
@@ -67,10 +66,11 @@ class Db():
     @staticmethod
     def drop_all_tables():
         con = Db.db_connection()
-        command = (
-            'drop table if exists "' | | users | | '" cascade;' from pg_tables
-            'drop table if exists "' | | ride_request | | '" cascade;' from pg_tables
-            'drop table if exists "' | | ride_offer | | '" cascade;' from pg_tables
+        cur = con.cursor()
+        commands = (
+            'drop table if exists "users" cascade;',
+            'drop table if exists "ride_request" cascade;', 
+            'drop table if exists "ride_offer" cascade;' 
         )
 
         for command in commands:
