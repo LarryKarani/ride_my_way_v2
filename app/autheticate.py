@@ -82,7 +82,7 @@ class Login(Resource):
             return {'message': f'username does not exist'}, 400
 
         # remember to use hashed password
-        if not check_password_hash(current_user[2] , data['password'].strip()):
+        if not check_password_hash(current_user[2], data['password'].strip()):
             print(current_user[2])
             return {'message': f'invalid username or password'}, 400
 

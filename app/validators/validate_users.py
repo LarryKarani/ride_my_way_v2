@@ -29,7 +29,9 @@ class UserSchema(Schema):
         if username.strip() == '':
             raise ValidationError('username cannot be empty')
 
+
 class LoginSchema(Schema):
+    """Schema for validating login data"""
     username = fields.String(required=True)
     password = fields.String(required=True)
 
