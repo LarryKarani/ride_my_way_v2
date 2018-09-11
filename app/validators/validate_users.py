@@ -44,3 +44,30 @@ class LoginSchema(Schema):
     def validates_password(self, password):
         if password.strip() == '':
             raise ValidationError('password cannot be empty')
+
+
+class RideSchema(Schema):
+    start_point = fields.String(required=True)
+    destination = fields.String(required=True)
+    seats_available = fields.Integer(required=True)
+    date = fields.String(required=True)
+    time = fields.String(required=True)
+
+    @validates("start_point")
+    def validate_start_point(self,start_point):
+        if start_point.strip == "":
+            raise ValidationError("start point cannot be blank")
+        elif len(start_point)<3:
+            raise ValidationError("start point should be at least 3 characters long")
+
+    @validates("destination")
+    def validate_destination(self,destination):
+        if destination.strip == "":
+            raise ValidationError(" destination cannot be blank")
+        elif len(destination)<3:
+            raise ValidationError("destination should be at least 3 characters long")
+
+    @validates("seats_available")
+    def seats_available(self, seats_available):
+        if seats_available<1:
+            raise ValidationError(" seats_available cannot be less than one")
