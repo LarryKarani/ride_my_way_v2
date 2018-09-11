@@ -3,12 +3,13 @@ import os
 import datetime
 from .db import Db
 
+from werkzeug.security import generate_password_hash
 
 class User():
     def __init__(self, username, email, password, designation):
         self.username = username
         self.email = email
-        self.password = password
+        self.password = generate_password_hash(password.strip())
         self.designation = designation
 
     def __repr__(self):

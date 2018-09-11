@@ -18,13 +18,13 @@ class BaseTestCase(TestCase):
             "username": "Larry Karani",
             "email": "karanilarry@gmail.com",
             "password": "hardpassword#",
-            "designation":'driver'
+            "designation": 'driver'
         }
-        self.data_with_invalid_email= {
+        self.data_with_invalid_email = {
             "username": "Larry Karani",
             "email": "karani.com",
             "password": "hardpassword#",
-            "designation":'driver'
+            "designation": 'driver'
         }
         self.registerdata_no_username = {
             "username": " ",
@@ -33,25 +33,43 @@ class BaseTestCase(TestCase):
             "designation": "driver"
         }
 
-        self.short_password={
+        self.short_password = {
             "username": "elvis ",
             "email": "karanilarry@gmail.com",
             "password": "hard",
             "designation": "driver"
         }
 
-        self.wrong_designation={
+        self.wrong_designation = {
             "username": "elvis",
             "email": "karanilarry@gmail.com",
             "password": "hard33333444",
             "designation": "pilot"
         }
 
+        self.login_data = {
+            "username": "Larry Karani",
+            "password": "hardpassword#"
+        }
+        self.wrong_password = {
+            "username": "Larry Karani",
+            "password": "hardpass777#"
+        }
+
+        self.empty_username = {
+            "username": " ",
+            "password": "hardpass777#"
+        }
+
+        self.empty_password = {
+            "username": "kapiyo ",
+            "password": " "
+        }
+
         self.default_user = users.User(
-            'james', 'hardpassword#', 'james@gmail.com','driver')
+            'james', 'hardpassword#', 'james@gmail.com', 'driver')
         self.default_user.register_user()
 
-        
     def tearDown(self):
         """clean Db"""
         db.Db.drop_all_tables()

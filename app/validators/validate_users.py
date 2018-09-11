@@ -8,7 +8,7 @@ class UserSchema(Schema):
     designation = fields.String(required=True)
 
     @validates('password')
-    def validates_age(self, password):
+    def validates_password(self, password):
         if password.strip() == '':
             raise ValidationError('password cannot be empty')
         elif len(password) < 8:
@@ -28,3 +28,17 @@ class UserSchema(Schema):
     def validates_username(self, username):
         if username.strip() == '':
             raise ValidationError('username cannot be empty')
+
+class LoginSchema(Schema):
+    username = fields.String(required=True)
+    password = fields.String(required=True)
+
+    @validates('username')
+    def validates_username(self, username):
+        if username.strip() == '':
+            raise ValidationError('username cannot be empty')
+
+    @validates('password')
+    def validates_password(self, password):
+        if password.strip() == '':
+            raise ValidationError('password cannot be empty')
