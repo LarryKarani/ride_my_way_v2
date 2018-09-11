@@ -1,4 +1,4 @@
-https://travis-ci.org/larryTheGeek/ride_my_way_v2.svg?branch=master
+[![Build Status](https://travis-ci.org/larryTheGeek/ride_my_way_v2.svg?branch=master)](https://travis-ci.org/larryTheGeek/ride_my_way_v2)
 
 
 Ride-my App is a carpooling application that provides drivers with the ability to create ride oﬀers and passengers to join the available ride oﬀers.
