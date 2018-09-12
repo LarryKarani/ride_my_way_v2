@@ -10,7 +10,7 @@ class Db():
 
         conn = psycopg2.connect(
             dbname=os.environ.get("db_name"),
-            user="postgres",
+            user=os.environ.get("user"),
             password=os.environ.get('db_password')
         )
         
