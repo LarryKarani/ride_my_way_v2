@@ -11,6 +11,7 @@ class Db():
         conn = psycopg2.connect(
             dbname=os.environ.get("db_name"),
             user=os.environ.get("user"),
+            host=os.environ.get("host"),
             password=os.environ.get('db_password')
         )
         
