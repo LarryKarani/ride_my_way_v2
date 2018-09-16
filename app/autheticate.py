@@ -10,7 +10,7 @@ from .models.users import User
 """This module contains the authetication feature"""
 
 autheticate = Namespace(
-    "api", description="authentication related opperations")
+    "Auth", description="authentication related opperations", path='/api/v1/rides')
 
 registration_data = autheticate.model('Regestration', {
     "username": fields.String(description='username'),
@@ -26,12 +26,6 @@ Login_data = autheticate.model('Login', {
 
 @autheticate.route('/auth/v1/register')
 class Register(Resource):
-    @autheticate.doc('list users')
-    def get(self):
-        all_users = User.get_all_usesrs()
-
-        return all_users
-
     @autheticate.expect(registration_data)
     def post(self):
         data = autheticate.payload

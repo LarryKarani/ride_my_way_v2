@@ -58,22 +58,19 @@ class RideOffer():
         cur = conn.cursor()
         cur.execute(sql)
         output = cur.fetchone()
-        if output:
-            print(f'this is your output {output}')
-        else:
-            print(f'ride offer for id {id} does not exist')
+        return output
 
     @staticmethod
     def get_all_ride_offers():
-        sql = f"SELECT * FROM ride_offer"
+        sql = f"SELECT * FROM ride_offer"    
         conn = Db.db_connection()
         cur = conn.cursor()
         cur.execute(sql)
         output = cur.fetchall()
-        if output:
-            print(f'this is your output {output}')
-        else:
-            print('no ride offers yet')
+        return output
+
+        ########################
+        
 
     @staticmethod
     def update_a_ride_offer(id, ride_route, price, depature_time,
@@ -81,7 +78,7 @@ class RideOffer():
                             final_destination,
                             available_seats):
         sql = f"UPDATE  ride_offer SET ride_route = \'{ride_route}\',\
-                                           price = {price},\
+                                           price = \'{price}\',\
                                            departure_time = \'{depature_time}\',\
                                            current_location = \'{ current_location}\',\
                                            final_destination = \'{final_destination}\',\
